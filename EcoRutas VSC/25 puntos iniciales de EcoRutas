@@ -1,0 +1,46 @@
+-- 1) Crear tabla
+create table estaciones (
+  id bigint generated always as identity primary key,
+  name text not null,
+  type text not null check (type in ('ev','gas')),
+  network text,
+  info text,
+  address text,
+  lat double precision not null,
+  lng double precision not null,
+  created_at timestamptz default now()
+);
+
+-- 2) Activar seguridad por fila y permitir lectura/inserción pública
+alter table estaciones enable row level security;
+
+create policy "lectura publica" on estaciones for select using (true);
+create policy "insercion publica" on estaciones for insert with check (true);
+
+-- 3) Precargar los puntos actuales
+insert into estaciones (name, type, network, info, address, lat, lng) values
+  ('EGO Charge - Mall Multiplaza Escazú', 'ev', 'EGO', '2x DC 60kW', 'Multiplaza Escazú, San José', 9.9189, -84.1389),
+  ('Territorio EV - San Pedro', 'ev', 'Territorio', '1x DC 50kW', 'Barrio Dent, San Pedro, San José', 9.935, -84.05),
+  ('Cargo Móvil - Avenida Central', 'ev', 'Cargo', '2x AC 22kW', 'Avenida Central, San José', 9.9333, -84.0833),
+  ('ICE Movistar - Alajuela Centro', 'ev', 'ICE', '1x DC 50kW', 'Parque Central, Alajuela', 10.0163, -84.2116),
+  ('Coopelesca EV - San Carlos', 'ev', 'Coopelesca', '1x DC 60kW', 'Ciudad Quesada, San Carlos', 10.3236, -84.4269),
+  ('CNFL Estación Heredia', 'ev', 'CNFL', '2x AC 22kW', 'Centro de Heredia', 10.0024, -84.1165),
+  ('EGO Charge - Terramall Cartago', 'ev', 'EGO', '2x DC 60kW', 'Terramall, Cartago', 9.8644, -83.9195),
+  ('Coopeguanacaste EV - Liberia', 'ev', 'Coopeguanacaste', '1x DC 50kW', 'Liberia, Guanacaste', 10.6346, -85.437),
+  ('Territorio EV - Tamarindo', 'ev', 'Territorio', '1x DC 60kW', 'Playa Tamarindo, Guanacaste', 10.2993, -85.8371),
+  ('ICE Movistar - Puntarenas', 'ev', 'ICE', '1x DC 50kW', 'Paseo de los Turistas, Puntarenas', 9.9762, -84.8384),
+  ('EGO Charge - Naranjo Centro', 'ev', 'EGO', '1x AC 22kW', 'Naranjo, Alajuela', 10.0975, -84.3833),
+  ('Cargo Móvil - Grecia', 'ev', 'Cargo', '1x AC 22kW', 'Grecia, Alajuela', 10.0703, -84.3122),
+  ('CNFL Estación Curridabat', 'ev', 'CNFL', '2x DC 50kW', 'Curridabat, San José', 9.9167, -84.0333),
+  ('ICE Movistar - Quepos', 'ev', 'ICE', '1x DC 60kW', 'Quepos, Puntarenas', 9.4319, -84.1621),
+  ('Territorio EV - San Isidro', 'ev', 'Territorio', '1x DC 50kW', 'Pérez Zeledón, San José', 9.3742, -83.7033),
+  ('Tomza Autogas - San Ramón', 'gas', 'Tomza', 'GLP vehicular', 'San Ramón, Alajuela', 10.0873, -84.4762),
+  ('Gas Zeta - Alajuela Sur', 'gas', 'Gas Zeta', 'GLP vehicular', 'Alajuela Sur, Alajuela', 10.0, -84.22),
+  ('Tomza Autogas - Desamparados', 'gas', 'Tomza', 'GLP vehicular', 'Desamparados, San José', 9.8975, -84.0667),
+  ('Gas Nacional - Cartago Centro', 'gas', 'Gas Nacional', 'GLP vehicular', 'Cartago Centro', 9.86, -83.91),
+  ('Zeta Gas - Turrialba', 'gas', 'Gas Zeta', 'GLP vehicular', 'Turrialba, Cartago', 9.9067, -83.6828),
+  ('Tomza Autogas - Guápiles', 'gas', 'Tomza', 'GLP vehicular', 'Guápiles, Limón', 10.2131, -83.7869),
+  ('Gas Nacional - Nicoya', 'gas', 'Gas Nacional', 'GLP vehicular', 'Nicoya, Guanacaste', 10.1483, -85.452),
+  ('Zeta Gas - Jacó', 'gas', 'Gas Zeta', 'GLP vehicular', 'Jacó, Puntarenas', 9.6142, -84.628),
+  ('Tomza Autogas - Limón Centro', 'gas', 'Tomza', 'GLP vehicular', 'Limón Centro', 9.9908, -83.0347),
+  ('Gas Nacional - Grecia', 'gas', 'Gas Nacional', 'GLP vehicular', 'Grecia, Alajuela', 10.073, -84.31);
