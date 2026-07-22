@@ -1,0 +1,4 @@
+// ⚠️ Pegá acá tus datos de Supabase (Settings → API en tu proyecto)
+// Este archivo lo usan tanto index.html como agregar.html
+const SUPABASE_URL = "https://nwancrsfpmlilgrivnfs.supabase.co";      // ej: https://xxxxxxxx.supabase.co
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53YW5jcnNmcG1saWxncml2bmZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ0MTI5NTYsImV4cCI6MjA5OTk4ODk1Nn0.N0W-HzOK6jmHSR9d5--pPdQmrPmn0FECc4be2apfvo4"; // la "anon public" key
