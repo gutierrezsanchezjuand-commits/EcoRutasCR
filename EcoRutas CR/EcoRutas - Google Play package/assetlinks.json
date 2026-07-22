@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.netlify.ecorutascr.twa",
+        "sha256_cert_fingerprints": ["9F:2D:90:05:33:CB:A3:DA:F0:0E:6C:75:28:C1:2E:9D:1C:23:63:38:CE:CD:0C:F8:84:94:7D:3B:13:F5:92:64"]
+      }
+    }]
